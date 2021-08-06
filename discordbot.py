@@ -1,5 +1,6 @@
 import discord
 import googletrans
+import time
 import os
 from pprint import pprint
 # 輸入自己Bot的TOKEN碼
@@ -21,8 +22,14 @@ async def on_message(message):
 
     if message.author == client.user:
         return
+    if message.content == '我好帥喔':
+        #刪除傳送者的訊息
+        await message.delete()
+        #然後回傳訊息
+        await message.channel.send('不好意思，不要騙人啦')
+
     #如果以「說」開頭
-    if message.content.startswith('說'):
+    elif message.content.startswith('說'):
       #分割訊息成兩份
       tmp = message.content.split(" ",2)
       #如果分割後串列長度只有1
@@ -42,7 +49,8 @@ async def on_message(message):
             return
         if translator.detect(content).lang == SRCLanguage or SRCLanguage == '':
             remessage = translator.translate(content, dest='zh-tw').text
-            await message.reply(remessage) 
+            await message.reply(remessage)
+
 
 
 client.run(TOKEN)
