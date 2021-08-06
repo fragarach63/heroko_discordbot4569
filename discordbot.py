@@ -49,7 +49,10 @@ async def on_message(message):
     elif message.content == '三小':
         #然後回傳訊息
         await message.channel.send('就跟你一樣:小眼睛，小鼻子，小屌')
-
+        
+    elif message.content == '哭啊':
+        #然後回傳訊息
+        await message.channel.send('你哭我也跟著哭啊~')
 
     #如果以「說」開頭
     elif message.content.startswith('說'):
