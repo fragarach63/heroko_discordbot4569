@@ -30,7 +30,7 @@ async def on_message(message):
         #然後回傳訊息
         await message.channel.send('哈囉肥宅')
         
-    elif message.content.in('哭'):
+    elif message.content == '哭':
         #然後回傳訊息
         await message.channel.send('不哭不哭眼淚是珍珠~')
         
@@ -38,7 +38,7 @@ async def on_message(message):
         #然後回傳訊息
         await message.channel.send('我就兇怎樣')
         
-    elif message.content.startswith('.'):
+    elif message.content == '.':
         #然後回傳訊息
         await message.channel.send('點屁啊點，只會點點點喔')
         
@@ -50,17 +50,6 @@ async def on_message(message):
         #然後回傳訊息
         await message.channel.send('就跟你一樣:小眼睛，小鼻子，小屌')
 
-    elif message.content.startswith('@'):
-        await message.channel.send('召喚失敗，跟你一樣~')
-
-    elif message.content.startswith('召喚'):
-        await message.channel.send('召喚成功，主角總是最後出場的啊~')
-
-    elif message.content.startswith('!play'):
-        await message.channel.send('想聽啊~我也是~')
-
-    elif message.content.startswith('>play'):
-        await message.channel.send('用第二個機器人聽可能會有問題喔~')
 
     #如果以「說」開頭
     elif message.content.startswith('說'):
