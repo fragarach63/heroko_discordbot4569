@@ -1,25 +1,18 @@
 import discord
-import googletrans
-import os
-from pprint import pprint
-# 輸入自己Bot的TOKEN碼
-TOKEN = os.environ['TOKEN']
-SRCLanguage=os.environ['SRC']
-DSTLanguage=os.environ['DST']
-
+#client是我們與Discord連結的橋樑
 client = discord.Client()
 
-# 起動時呼叫
+#調用event函式庫
 @client.event
+#當機器人完成啟動時
 async def on_ready():
-    print('成功登入')
+    print('目前登入身份：',client.user)
 
-# 收到訊息時呼叫
 @client.event
+#當有訊息時
 async def on_message(message):
-    # 送信者為Bot時無視
-    
-if message.author == client.user:
+    #排除自己的訊息，避免陷入無限循環
+    if message.author == client.user:
         return
     #如果以「說」開頭
     if message.content.startswith('說'):
@@ -30,8 +23,5 @@ if message.author == client.user:
         await message.channel.send("你要我說什麼啦？")
       else:
         await message.channel.send(tmp[1])
-    
-     
-    
-            
-client.run(TOKEN)
+
+client.run('你的機器人TOKEN') #TOKEN在剛剛Discord Developer那邊「BOT」頁面裡面
