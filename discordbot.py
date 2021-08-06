@@ -19,7 +19,17 @@ async def on_ready():
 async def on_message(message):
     # 送信者為Bot時無視
     
-
+if message.author == client.user:
+        return
+    #如果以「說」開頭
+    if message.content.startswith('說'):
+      #分割訊息成兩份
+      tmp = message.content.split(" ",2)
+      #如果分割後串列長度只有1
+      if len(tmp) == 1:
+        await message.channel.send("你要我說什麼啦？")
+      else:
+        await message.channel.send(tmp[1])
     
     if client.user in message.mentions: # @判定
         translator = googletrans.Translator()
