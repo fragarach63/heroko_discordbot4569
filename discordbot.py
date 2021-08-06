@@ -1,17 +1,23 @@
-import discord
-#client是我們與Discord連結的橋樑
+import googletrans
+import os
+from pprint import pprint
+# 輸入自己Bot的TOKEN碼
+TOKEN = os.environ['TOKEN']
+SRCLanguage=os.environ['SRC']
+DSTLanguage=os.environ['DST']
+
 client = discord.Client()
 
-#調用event函式庫
+# 起動時呼叫
 @client.event
-#當機器人完成啟動時
 async def on_ready():
-    print('目前登入身份：',client.user)
+    print('成功登入')
 
+# 收到訊息時呼叫
 @client.event
-#當有訊息時
 async def on_message(message):
-    #排除自己的訊息，避免陷入無限循環
+    # 送信者為Bot時無視
+
     if message.author == client.user:
         return
     #如果以「說」開頭
@@ -24,4 +30,18 @@ async def on_message(message):
       else:
         await message.channel.send(tmp[1])
 
-client.run('你的機器人TOKEN') #TOKEN在剛剛Discord Developer那邊「BOT」頁面裡面
+    elif client.user in message.mentions: # @判定
+        translator = googletrans.Translator()
+        robotName = client.user.name
+        first, space, content = message.clean_content.partition('@'+robotName+' ')
+
+        if content == '':
+            content = first
+        if translator.detect(content).lang == DSTLanguage:
+            return
+        if translator.detect(content).lang == SRCLanguage or SRCLanguage == '':
+            remessage = translator.translate(content, dest='zh-tw').text
+            await message.reply(remessage) 
+
+
+client.run(TOKEN)
