@@ -20,9 +20,15 @@ async def on_ready():
 async def on_message(message):
     # 送信者為Bot時無視
 
+    if message.author == client.user:
+        return
     if message.content == '我好帥喔':
         #然後回傳訊息
         await message.channel.send('不好意思，不要騙人啦')
+
+    elif message.content == '我好帥喔123':
+        #然後回傳訊息
+        await message.channel.send('不好意思，不要騙人啦123')
 
     #如果以「說」開頭
     elif message.content.startswith('說'):
