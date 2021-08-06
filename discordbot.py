@@ -1,3 +1,4 @@
+import discord
 import googletrans
 import os
 from pprint import pprint
@@ -17,24 +18,14 @@ async def on_ready():
 @client.event
 async def on_message(message):
     # 送信者為Bot時無視
-
-    if message.author == client.user:
+    if message.author.bot:
         return
-    #如果以「說」開頭
-    if message.content.startswith('說'):
-      #分割訊息成兩份
-      tmp = message.content.split(" ",2)
-      #如果分割後串列長度只有1
-      if len(tmp) == 1:
-        await message.channel.send("你要我說什麼啦？")
-      else:
-        await message.channel.send(tmp[1])
-
-    elif client.user in message.mentions: # @判定
+    
+    if client.user in message.mentions: # @判定
         translator = googletrans.Translator()
         robotName = client.user.name
         first, space, content = message.clean_content.partition('@'+robotName+' ')
-
+        
         if content == '':
             content = first
         if translator.detect(content).lang == DSTLanguage:
@@ -43,5 +34,5 @@ async def on_message(message):
             remessage = translator.translate(content, dest='zh-tw').text
             await message.reply(remessage) 
 
-
+# Bot起動
 client.run(TOKEN)
