@@ -30,7 +30,7 @@ async def on_message(message):
         #然後回傳訊息
         await message.channel.send('哈囉肥宅')
         
-    elif message.content startswith '哭':
+    elif message.content == '哭':
         #然後回傳訊息
         await message.channel.send('不哭不哭眼淚是珍珠~')
         
