@@ -54,12 +54,6 @@ async def on_message(message):
         #然後回傳訊息
         await message.channel.send('你哭我也跟著哭啊~')
         
-    elif message.content.start('召喚'):
-        await message.channel.send('召喚成功!主角總是最後登場的嘛~')
-
-    elif message.content.start('@'):
-        await message.channel.send('召喚失敗!你真的知道怎麼叫人出來嗎?')
-
     #如果以「說」開頭
     elif message.content.startswith('說'):
       #分割訊息成兩份
